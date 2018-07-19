@@ -27,15 +27,9 @@ def submitCode():
     if lang=='':
         lang='CPP'
     data['language']=lang
+    filename=input('Code file name:')
     codes=[]
-    print('Code:')
-    while True:
-        code=input() 
-        if code:
-            codes.append(code)
-        else:
-            break
-    data['code']='\n'.join(codes)
+    data['code']=open(filename+'.'+lang.lower(),"r").read()
     data['problemid']=problem
     data['contestid']=0
     session.post(purl,data=data,headers=headers)
