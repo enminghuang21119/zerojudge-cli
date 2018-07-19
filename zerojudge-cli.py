@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import colorTable as cT
+import getpass
 headers={}
 headers['User-Agent']="Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"
 loginurl='https://zerojudge.tw/Login'
@@ -13,7 +14,7 @@ purl='https://zerojudge.tw/Solution.api?action=SubmitCode&'
 session=requests.session()
 def Login():
     account=input('account:')
-    pswd=input('password:')
+    pswd=getpass.getpass('password:')
     user['account']=account
     user['passwd']=pswd
     session.post(loginurl,user,headers=headers)
