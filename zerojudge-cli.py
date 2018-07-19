@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import colorTable as cT
 import getpass
+import webbrowser
 headers={}
 headers['User-Agent']="Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"
 loginurl='https://zerojudge.tw/Login'
@@ -73,18 +74,25 @@ def dashBoard(flag):
             print(cT.bcolors.OKGREEN+str1)
         elif str1=='TLE':
             print(cT.bcolors.OKBLUE+str1)
+        elif str1=='WA':
+            print(cT.bcolors.FAIL+str1)
         else:
             print(cT.bcolors.WARNING+str1)
         print(cT.bcolors.ENDC,resp[1])
         cnt=cnt+1
     return 0
 def showProblem(prob):
-    soup=BeautifulSoup(session.get(qurl+prob,headers=headers).text,"html5lib")
-    #for i in soup.find('div',id='problem_content').find_all('h4'):
-    #    print(i.text)
-    print(soup.find('div',id='problem_content',class_='problembox').find_all('h4'))
+    response=requests.get(qurl+prob)
+    try:
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        print('Error: '+str(e))
+        print(cT.bcolors.BOLD+cT.bcolors.FAIL+'wrong problem number'+cT.bcolors.ENDC)
+        return 1
+    webbrowser.open_new_tab(qurl+prob)
+    return 0
 while Login()==1:
-    print('Login failed ,try again')
+    print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Login failed ,try again'+cT.bcolors.ENDC)
 while True:
     c=input(cT.bcolors.OKBLUE+cT.bcolors.BOLD+'>>'+cT.bcolors.ENDC) 
     if c=='h':
