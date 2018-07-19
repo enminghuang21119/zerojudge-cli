@@ -8,7 +8,6 @@ ___
 
 ____ 
 
-
 ## Install
 
 下載，然後安裝python的要用的pacakge:requests,beautifulSoup4
@@ -18,6 +17,7 @@ ___
 ## Feature
 1. 可以看即時動態
 2. 可以提交程式碼
+3. AC，TLE等等有高亮
 
 ____
 
