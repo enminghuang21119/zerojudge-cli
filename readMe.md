@@ -3,17 +3,21 @@
 ___
 
 ## Introdution
-
 這是一個能夠用python去與zerojudge互動的簡易小程式 
 
-____ 
+___ 
 
 ## Install
-
 下載，然後安裝python的要用的pacakge:requests,beautifulSoup4
 
-___
+____
 
+##usage
+用python3執行這個檔案
+會看到藍色的>>
+打h有help可以看
+
+___
 ## Feature
 1. 可以看即時動態
 2. 可以提交程式碼
