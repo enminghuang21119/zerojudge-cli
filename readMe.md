@@ -1,5 +1,4 @@
 # zerojudge-cli
-
 # 先不要用showproblem功能尚未完成
 ___
 
@@ -9,7 +8,7 @@ ___
 ___ 
 
 ## Install
-下載，然後安裝python的要用的pacakge:requests,beautifulSoup4,python-html5lib
+下載，然後安裝python的要用的pacakge:requests,beautifulSoup4,python-html5lib,getpass
 
 ____
 
