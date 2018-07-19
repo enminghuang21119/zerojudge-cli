@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import requests
 from bs4 import BeautifulSoup
 import colorTable as cT
@@ -14,8 +15,8 @@ user={'token':''}
 purl='https://zerojudge.tw/Solution.api?action=SubmitCode&'
 session=requests.session()
 def Login():
-    account=input('account:')
-    pswd=getpass.getpass('password:')
+    account=input('account: ')
+    pswd=getpass.getpass('password: ')
     user['account']=account
     user['passwd']=pswd
     session.post(loginurl,user,headers=headers)
@@ -24,12 +25,12 @@ def Login():
     return 0
 def submitCode():
     data={}
-    problem=input('Problem:')
-    lang=input('language(Default is CPP):')
+    problem=input('Problem: ')
+    lang=input('language(Default is CPP): ')
     if lang=='':
         lang='CPP'
     data['language']=lang
-    filename=input('Code file name without extension:')
+    filename=input('Code file name without extension: ')
     codes=[]
     try:
         data['code']=open(filename+'.'+lang.lower(),"r").read()
@@ -97,15 +98,15 @@ def showProblem(prob):
 while Login()==1:
     print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Login failed ,try again'+cT.bcolors.ENDC)
 while True:
-    c=input(cT.bcolors.OKBLUE+cT.bcolors.BOLD+'>>'+cT.bcolors.ENDC) 
+    c=input(cT.bcolors.OKBLUE+cT.bcolors.BOLD+'>> '+cT.bcolors.ENDC) 
     if c=='h':
         Help()
     elif c=='submit' or c=='s':
         submitCode()
-    elif c=='dashBoard' or c=='d':
+    elif c=='dashboard' or c=='d':
         dashBoard(None)
     elif c=='showproblem' or c=='sp':
-        showProblem(input('Problem:'))
+        showProblem(input('Problem: '))
     elif c=='quit' or c=='exit': 
         break 
     else:
