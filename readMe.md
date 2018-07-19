@@ -1,5 +1,4 @@
 # zerojudge-cli
-# 先不要用showproblem功能尚未完成
 ___
 
 ## Introdution
@@ -8,7 +7,7 @@ ___
 ___ 
 
 ## Install
-下載，然後安裝python的要用的pacakge:requests,beautifulSoup4,python-html5lib,getpass
+下載，然後安裝python的要用的pacakge:requests,beautifulSoup4,html5lib,getpass,webbrowser
 
 ____
 
@@ -21,8 +20,9 @@ ___
 ## Feature
 1. 可以看即時動態
 2. 可以提交程式碼
-3. AC，TLE等等有高亮
+3. AC，TLE，WA等等有高亮
 4. 自己的submission有綠色底線
+5. 可以看題目
 ____
 
 ## Todo 
