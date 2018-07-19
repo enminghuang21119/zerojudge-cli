@@ -66,7 +66,15 @@ def dashBoard(flag):
         resp.append(i.find('span',id='judgement',attrs={'data-solutionid':solveId}).text)
         resp.append(i.find_all('span',id='summary')[1].text)
         print(solveId,userId[0],userId[1],pr[0],pr[1])
-        print(cT.bcolors.BOLD+cT.bcolors.WARNING+resp[0].lstrip()+cT.bcolors.ENDC,resp[1])
+        print(cT.bcolors.BOLD)
+        str1=''.join(list(filter(str.isalnum,resp[0])))
+        if str1=='AC':
+            print(cT.bcolors.OKGREEN+str1)
+        elif str1=='TLE':
+            print(cT.bcolors.OKBLUE+str1)
+        else:
+            print(cT.bcolors.WARNING+str1)
+        print(cT.bcolors.ENDC,resp[1])
         cnt=cnt+1
     return 0
 while Login()==1:
