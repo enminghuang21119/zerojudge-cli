@@ -11,7 +11,7 @@ user={'token':''}
 purl='https://zerojudge.tw/Solution.api?action=SubmitCode&'
 session=requests.session()
 def Login():
-    account=input('accout:')
+    account=input('account:')
     pswd=input('password:')
     user['account']=account
     user['passwd']=pswd
