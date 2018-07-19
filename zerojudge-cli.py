@@ -31,7 +31,10 @@ def submitCode():
     data['language']=lang
     filename=input('Code file name without extension:')
     codes=[]
-    data['code']=open(filename+'.'+lang.lower(),"r").read()
+    try:
+        data['code']=open(filename+'.'+lang.lower(),"r").read()
+    except (OSError,IOError) as e:
+        print(cT.bcolors.BOLD+cT.bcolors.FAIL+'File not found !'+cT.bcolors.ENDC)
     data['problemid']=problem
     data['contestid']=0
     session.post(purl,data=data,headers=headers)
