@@ -16,7 +16,7 @@ ____
 用python3執行這個檔案
 會看到藍色的>>
 打h有help可以看
-
+如果有submit，將code跟zerojudge-cli.py放在同一個地方內在submit時打上檔名即可
 ___
 ## Feature
 1. 可以看即時動態
