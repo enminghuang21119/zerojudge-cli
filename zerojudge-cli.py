@@ -7,6 +7,7 @@ loginurl='https://zerojudge.tw/Login'
 logouturl='https://zerojudge.tw/Logout'
 Userurl='https://zerojudge.tw/UserStatistic'
 resurl='https://zerojudge.tw/Submissions'
+qurl='https://zerojudge.tw/ShowProblem?problemid='
 user={'token':''}
 purl='https://zerojudge.tw/Solution.api?action=SubmitCode&'
 session=requests.session()
@@ -36,6 +37,7 @@ def Help():
     print('Type dashboard or d to see the dashboard') 
     print('Type s or submit to submit code')
     print('Type h for help')
+    print('Type sp or showproblem to show the specific problem')
     print('Type quit or exit to logout and quit')
 def dashBoard(flag):
     soup=BeautifulSoup(session.get(resurl,headers=headers).text,"html5lib")
@@ -75,6 +77,11 @@ def dashBoard(flag):
         print(cT.bcolors.ENDC,resp[1])
         cnt=cnt+1
     return 0
+def showProblem(prob):
+    soup=BeautifulSoup(session.get(qurl+prob,headers=headers).text,"html5lib")
+    #for i in soup.find('div',id='problem_content').find_all('h4'):
+    #    print(i.text)
+    print(soup.find('div',id='problem_content',class_='problembox').find_all('h4'))
 while Login()==1:
     print('Login failed ,try again')
 while True:
@@ -85,6 +92,8 @@ while True:
         submitCode()
     elif c=='dashBoard' or c=='d':
         dashBoard(None)
+    elif c=='showproblem' or c=='sp':
+        showProblem(input('Problem:'))
     elif c=='quit' or c=='exit': 
         break 
     else:
