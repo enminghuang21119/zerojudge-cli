@@ -1,5 +1,6 @@
 # zerojudge-cli
 
+# 先不要用showproblem功能尚未完成
 ___
 
 ## Introdution
