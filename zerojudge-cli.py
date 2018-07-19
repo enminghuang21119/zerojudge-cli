@@ -27,7 +27,7 @@ def submitCode():
     if lang=='':
         lang='CPP'
     data['language']=lang
-    filename=input('Code file name:')
+    filename=input('Code file name without extension:')
     codes=[]
     data['code']=open(filename+'.'+lang.lower(),"r").read()
     data['problemid']=problem
