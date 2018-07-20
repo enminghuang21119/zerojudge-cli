@@ -66,7 +66,6 @@ def dashBoard(flag):
         resp=[]
         resp.append(i.find('span',id='judgement',attrs={'data-solutionid':solveId}).text)
         resp.append(i.find_all('span',id='summary')[1].text)
-        print('test:',userId[0],user['account'])
         if userId[0]==user['account']:
             print(cT.bcolors.UNDERLINE+cT.bcolors.OKGREEN)
             print(solveId,userId[0],userId[1],pr[0],pr[1],cT.bcolors.ENDC)
