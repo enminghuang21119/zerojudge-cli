@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['zerojudge-cli.py'],
-             pathex=['Z:\\home\\neptune\\GitHub\\zerojudge-cli'],
+             pathex=['Z:\\home\\neptune\\GitHub\\zerojudge-cli','~/.wine/drive_c/Python27/Lib/site-packages','Z:\\usr\\lib\\python3.6\\site-packages'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -18,12 +18,16 @@ pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
           a.scripts,
-          a.binaries,
-          a.zipfiles,
-          a.datas,
+          exclude_binaries=True,
           name='zerojudge-cli',
           debug=False,
           strip=False,
           upx=True,
-          runtime_tmpdir=None,
           console=True )
+coll = COLLECT(exe,
+               a.binaries,
+               a.zipfiles,
+               a.datas,
+               strip=False,
+               upx=True,
+               name='zerojudge-cli')
