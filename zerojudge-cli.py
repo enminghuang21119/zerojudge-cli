@@ -46,7 +46,7 @@ def Help():
     print('Type sp or showproblem to show the specific problem')
     print('Type quit or exit to logout and quit')
 def dashBoard(flag):
-    soup=BeautifulSoup(session.get(resurl,headers=headers).text,"html5lib")
+    soup=BeautifulSoup(session.get(resurl,headers=headers).text,"lxml")
     if len(soup.find_all('tr',attrs={'solutionid':True}))==0:
         return 1
     if flag:
