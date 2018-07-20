@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import requests
-import re
 from bs4 import BeautifulSoup
 import colorTable as cT
 import getpass
@@ -21,7 +20,7 @@ def Login():
     user['account']=account
     user['passwd']=pswd
     session.post(loginurl,user,headers=headers)
-    if dashBoard(1)==1:
+    if dashBoard(1, 0)==1:
         return 1
     return 0
 def submitCode():
@@ -41,12 +40,24 @@ def submitCode():
     data['contestid']=0
     session.post(purl,data=data,headers=headers)
 def Help():
-    print('Type dashboard or d to see the dashboard') 
+    print('Type d or dashboard to see the dashboard')
+    print('Type \'d [1, 20]\' to show specific numbers of submissions(default:5). ex: d 10') 
     print('Type s or submit to submit code')
     print('Type h for help')
     print('Type sp or showproblem to show the specific problem')
     print('Type quit or exit to logout and quit')
-def dashBoard(flag):
+def cmpString(first, second):
+    if first == second:
+        return 1
+    if len(second) >= 15:
+        cnt = 0
+        for i in first:
+            if cnt == 14:
+                return 1
+            if i != second[cnt]:
+                return 0;
+            cnt += 1
+def dashBoard(flag, times):
     soup=BeautifulSoup(session.get(resurl,headers=headers).text,"lxml")
     if len(soup.find_all('tr',attrs={'solutionid':True}))==0:
         return 1
@@ -54,10 +65,9 @@ def dashBoard(flag):
         return 0
     cnt=0
     for i in soup.find_all('tr',attrs={'solutionid':True}):
-        if cnt==5:
+        if cnt == times:
             break
-        if cnt>0:
-            print(cT.bcolors.BOLD+cT.bcolors.FAIL+'-'*35+cT.bcolors.ENDC)
+        print(cT.bcolors.BOLD+cT.bcolors.FAIL+'-'*35+cT.bcolors.ENDC)
         solveId=i.find('td',id='solutionid').text
         userId=[]
         userId.append(i.find('a',attrs={'title':True}).text)
@@ -69,7 +79,8 @@ def dashBoard(flag):
         resp=[]
         resp.append(i.find('span',id='judgement',attrs={'data-solutionid':solveId}).text)
         resp.append(i.find_all('span',id='summary')[1].text)
-        if userId[0]==user['account']:
+        #if userId[0]==user['account']:
+        if cmpString(userId[0], user['account']):
             print(cT.bcolors.UNDERLINE+cT.bcolors.OKGREEN)
             print(solveId,userId[0],userId[1])
             print(pr[0],pr[1],cT.bcolors.ENDC, end='')
@@ -87,7 +98,8 @@ def dashBoard(flag):
         else:
             print(cT.bcolors.WARNING+str1)
         print(cT.bcolors.ENDC,resp[1])
-        cnt=cnt+1
+        cnt += 1
+    print(cT.bcolors.BOLD+cT.bcolors.FAIL+'-'*35+cT.bcolors.ENDC)
     return 0
 def showProblem(prob):
     response=requests.get(qurl+prob)
@@ -100,7 +112,7 @@ def showProblem(prob):
     webbrowser.open_new_tab(qurl+prob)
     return 0
 
-conform_login=input("Login to access more features? Y/N :")
+conform_login=input('Login to access more features? Y/N : ')
 if conform_login=='Y' or conform_login=='y':
     while Login()==1:
         print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Login failed ,try again'+cT.bcolors.ENDC)
@@ -114,18 +126,30 @@ while True:
         if conform_login=='Y' or conform_login=='y':
             submitCode()
         else:
-            print("Not login yet!")
-            conform_login=input("Login? Y/N :")
+            print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Not login yet!'+cT.bcolors.ENDC)
+            conform_login=input('Login? Y/N :')
             if conform_login=='Y' or conform_login=='y':
                 while Login()==1:
                     print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Login failed ,try again'+cT.bcolors.ENDC)
     
-    elif c=='dashboard' or c=='d':
+    elif c=='dashboard' or c[0]=='d':
         if conform_login=='Y' or conform_login=='y':
-            dashBoard(None)
+            tmp = 0
+            cnt = 5
+            x = c.split(' ')
+            for i in x:
+                tmp += 1
+                if tmp == 2:
+                    cnt = i
+                elif tmp > 2:
+                    break
+            if tmp > 2:
+                print('Unknown conform_login , type h for help')
+            else:
+                dashBoard(None, int(cnt))
         else:
-            print("Not login yet!")
-            conform_login=input("Login? Y/N :")
+            print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Not login yet!'+cT.bcolors.ENDC)
+            conform_login=input('Login? Y/N : ')
             if conform_login=='Y' or conform_login=='y':
                 while Login()==1:
                     print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Login failed ,try again'+cT.bcolors.ENDC)
