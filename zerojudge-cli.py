@@ -4,6 +4,15 @@ from bs4 import BeautifulSoup
 import colorTable as cT
 import getpass
 import webbrowser
+zerjudgecli='''\
+ _____                     _           __                      ___ 
+/__  /  ___  _________    (_)_  ______/ /___ ____        _____/ (_)
+  / /  / _ \/ ___/ __ \  / / / / / __  / __ `/ _ \______/ ___/ / / 
+ / /__/  __/ /  / /_/ / / / /_/ / /_/ / /_/ /  __/_____/ /__/ / /  
+/____/\___/_/   \____/_/ /\__,_/\__,_/\__, /\___/      \___/_/_/   
+                    /___/            /____/                        
+'''
+print(zerjudgecli)
 headers={}
 headers['User-Agent']="Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"
 loginurl='https://zerojudge.tw/Login'
