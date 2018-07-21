@@ -67,11 +67,15 @@ def dashBoard(flag, times):
     for i in soup.find_all('tr',attrs={'solutionid':True}):
         if cnt == times:
             break
-        print(cT.bcolors.BOLD+cT.bcolors.FAIL+'-'*35+cT.bcolors.ENDC)
+        if cnt >= 9:
+            out = 16
+        else:
+            out = 17
+        print(cT.bcolors.BOLD+cT.bcolors.FAIL+'-'*out+cT.bcolors.CYAN+str(cnt + 1)+cT.bcolors.BOLD+cT.bcolors.FAIL+'-'*16+cT.bcolors.ENDC)
         solveId=i.find('td',id='solutionid').text
         userId=[]
         userId.append(i.find('a',attrs={'title':True}).text)
-        userId.append(i.find('span',attrs={'title':True}).text)
+        userId.append(i.find('span',attrs={'title':True}).text.rstrip())
         pr=[]
         p=i.find_all('a',attrs={'title':True})[1]
         pr.append(p.get('href').split('=')[1])
@@ -90,16 +94,16 @@ def dashBoard(flag, times):
         print(cT.bcolors.BOLD)
         str1=''.join(list(filter(str.isalnum,resp[0])))
         if str1=='AC':
-            print(cT.bcolors.OKGREEN+str1)
+            print(cT.bcolors.OKGREEN+str1, end='')
         elif str1=='TLE':
-            print(cT.bcolors.OKBLUE+str1)
+            print(cT.bcolors.OKBLUE+str1, end='')
         elif str1=='WA':
-            print(cT.bcolors.FAIL+str1)
+            print(cT.bcolors.FAIL+str1, end='')
         else:
-            print(cT.bcolors.WARNING+str1)
+            print(cT.bcolors.WARNING+str1, end='')
         print(cT.bcolors.ENDC,resp[1])
+        print()
         cnt += 1
-    print(cT.bcolors.BOLD+cT.bcolors.FAIL+'-'*35+cT.bcolors.ENDC)
     return 0
 def showProblem(prob):
     response=requests.get(qurl+prob)
@@ -116,10 +120,12 @@ conform_login=input('Login to access more features? Y/N : ')
 if conform_login=='Y' or conform_login=='y':
     while Login()==1:
         print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Login failed ,try again'+cT.bcolors.ENDC)
-        
 
 while True:
-    c=input(cT.bcolors.OKBLUE+cT.bcolors.BOLD+'>> '+cT.bcolors.ENDC) 
+    while 1:
+        c=input(cT.bcolors.OKBLUE+cT.bcolors.BOLD+'>> '+cT.bcolors.ENDC)
+        if c:
+            break
     if c=='h':
         Help()
     elif c=='submit' or c=='s':
@@ -143,7 +149,7 @@ while True:
                     cnt = i
                 elif tmp > 2:
                     break
-            if tmp > 2:
+            if tmp > 2 or (x[0] != 'dashboard' and x[0] != 'd'):
                 print('Unknown conform_login , type h for help')
             else:
                 dashBoard(None, int(cnt))
