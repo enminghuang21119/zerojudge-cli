@@ -17,7 +17,7 @@ zerjudgecli='''\
 /____/\___/_/   \____/_/ /\__,_/\__,_/\__, /\___/      \___/_/_/   
                     /___/            /____/                        
 '''
-print('\033[34m'+zerjudgecli+'\033[0m')
+print(cT.bcolors.CYAN+zerjudgecli+cT.bcolors.ENDC)
 headers={}
 headers['User-Agent']="Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"
 loginurl='https://zerojudge.tw/Login'
