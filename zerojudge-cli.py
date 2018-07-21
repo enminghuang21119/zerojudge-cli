@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-import requests
-from bs4 import BeautifulSoup
-import colorTable as cT
-import getpass
-import webbrowser
+try:
+    import requests
+    from bs4 import BeautifulSoup
+    import colorTable as cT
+    import getpass
+    import lxml
+    import webbrowser
+except ImportError:
+    print('\033[1m'+'\033[91m'+'Module import error !\nPlease install needed module in zerojudge-cli.py'+'\033[0m')
+    exit(2)
 zerjudgecli='''\
  _____                     _           __                      ___ 
 /__  /  ___  _________    (_)_  ______/ /___ ____        _____/ (_)
@@ -23,9 +28,26 @@ qurl='https://zerojudge.tw/ShowProblem?problemid='
 user={'token':''}
 purl='https://zerojudge.tw/Solution.api?action=SubmitCode&'
 session=requests.session()
+def inputTry(out):
+    try:
+        re=input(out)
+    except EOFError:
+        print()
+        exit(0)
+    except KeyboardInterrupt:
+        print()
+        exit(1)
+    return re
 def Login():
-    account=input('account: ')
-    pswd=getpass.getpass('password: ')
+    account=inputTry('account: ')
+    try:
+        pswd=getpass.getpass('password: ')
+    except EOFError:
+        print()
+        exit(0)
+    except KeyboardInterrupt:
+        print()
+        exit(1)
     user['account']=account
     user['passwd']=pswd
     session.post(loginurl,user,headers=headers)
@@ -34,12 +56,12 @@ def Login():
     return 0
 def submitCode():
     data={}
-    problem=input('Problem: ')
-    lang=input('language(Default is CPP): ')
+    problem=inputTry('Problem: ')
+    lang=inputTry('language(Default is CPP): ')
     if lang=='':
         lang='CPP'
     data['language']=lang
-    filename=input('Code file name without extension: ')
+    filename=inputTry('Code file name without extension: ')
     codes=[]
     try:
         data['code']=open(filename+'.'+lang.lower(),"r").read()
@@ -127,7 +149,7 @@ while Login()==1:
     print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Login failed ,try again'+cT.bcolors.ENDC)
 while True:
     while 1:
-        c=input(cT.bcolors.OKBLUE+cT.bcolors.BOLD+'>> '+cT.bcolors.ENDC)
+        c=inputTry(cT.bcolors.OKBLUE+cT.bcolors.BOLD+'>> '+cT.bcolors.ENDC)
         if c:
             break
     if c=='h':
@@ -149,7 +171,7 @@ while True:
         else:
             dashBoard(None, int(cnt))
     elif c=='showproblem' or c=='sp':
-        showProblem(input('Problem: '))
+        showProblem(inputTry('Problem: '))
     elif c=='quit' or c=='exit' or c=='q': 
         break 
     else:
