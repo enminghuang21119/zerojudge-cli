@@ -41,7 +41,7 @@ def submitCode():
     session.post(purl,data=data,headers=headers)
 def Help():
     print('Type d or dashboard to see the dashboard')
-    print('Type \'d [1, 20]\' to show specific numbers of submissions(default:5). ex: d 10') 
+    print("Type 'd [1, 20]' to show specific numbers of submissions(default:5). ex: d 10") 
     print('Type s or submit to submit code')
     print('Type h for help')
     print('Type sp or showproblem to show the specific problem')
