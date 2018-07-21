@@ -20,7 +20,7 @@ def Login():
     user['account']=account
     user['passwd']=pswd
     session.post(loginurl,user,headers=headers)
-    if dashBoard(1, 0)==1:
+    if dashBoard(1,None)==1:
         return 1
     return 0
 def submitCode():
@@ -41,7 +41,7 @@ def submitCode():
     session.post(purl,data=data,headers=headers)
 def Help():
     print('Type d or dashboard to see the dashboard')
-    print("Type 'd [1, 20]' to show specific numbers of submissions(default:5). ex: d 10") 
+    print("Type 'd between 1 and 20' to show specific numbers of submissions(default:5). ex: d 10") 
     print('Type s or submit to submit code')
     print('Type h for help')
     print('Type sp or showproblem to show the specific problem')
@@ -65,12 +65,12 @@ def dashBoard(flag, times):
         return 0
     cnt=0
     for i in soup.find_all('tr',attrs={'solutionid':True}):
-        if cnt == times:
+        if cnt==times:
             break
-        if cnt >= 9:
-            out = 16
+        if cnt>=9:
+            out=16
         else:
-            out = 17
+            out=17
         print(cT.bcolors.BOLD+cT.bcolors.FAIL+'-'*out+cT.bcolors.CYAN+str(cnt + 1)+cT.bcolors.BOLD+cT.bcolors.FAIL+'-'*16+cT.bcolors.ENDC)
         solveId=i.find('td',id='solutionid').text
         userId=[]
@@ -83,7 +83,6 @@ def dashBoard(flag, times):
         resp=[]
         resp.append(i.find('span',id='judgement',attrs={'data-solutionid':solveId}).text)
         resp.append(i.find_all('span',id='summary')[1].text)
-        #if userId[0]==user['account']:
         if cmpString(userId[0], user['account']):
             print(cT.bcolors.UNDERLINE+cT.bcolors.OKGREEN, end='')
             print(solveId,userId[0],userId[1])
@@ -103,7 +102,7 @@ def dashBoard(flag, times):
             print(cT.bcolors.WARNING+str1, end='')
         print(cT.bcolors.ENDC,resp[1])
         print()
-        cnt += 1
+        cnt+=1
     return 0
 def showProblem(prob):
     response=requests.get(qurl+prob)
@@ -115,10 +114,8 @@ def showProblem(prob):
         return 1
     webbrowser.open_new_tab(qurl+prob)
     return 0
-
 while Login()==1:
     print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Login failed ,try again'+cT.bcolors.ENDC)
-
 while True:
     while 1:
         c=input(cT.bcolors.OKBLUE+cT.bcolors.BOLD+'>> '+cT.bcolors.ENDC)
@@ -139,7 +136,7 @@ while True:
             elif tmp > 2:
                 break
         if tmp > 2 or (x[0] != 'dashboard' and x[0] != 'd'):
-            print('Unknown conform_login , type h for help')
+            print('Unknown command , type h for help')
         else:
             dashBoard(None, int(cnt))
     elif c=='showproblem' or c=='sp':
@@ -147,6 +144,6 @@ while True:
     elif c=='quit' or c=='exit' or c=='q': 
         break 
     else:
-        print('Unknown conform_login , type h for help')
+        print('Unknown command , type h for help')
         continue
 session.get(logouturl,headers=headers)
