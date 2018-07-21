@@ -11,5 +11,5 @@ setup(
     version='0.1',
     options=options,
     description='zerojudge in command line',
-    executables=[Executable("zerojudge-cli.py",base=base)]
+    executables=[Executable("zerojudge-cli.py",base=base,icon="icon.ico")]
 )

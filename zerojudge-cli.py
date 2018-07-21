@@ -20,7 +20,7 @@ def Login():
     user['account']=account
     user['passwd']=pswd
     session.post(loginurl,user,headers=headers)
-    if dashBoard(1)==1:
+    if dashBoard(1,None)==1:
         return 1
     return 0
 def submitCode():
@@ -40,12 +40,24 @@ def submitCode():
     data['contestid']=0
     session.post(purl,data=data,headers=headers)
 def Help():
-    print('Type dashboard or d to see the dashboard') 
+    print('Type d or dashboard to see the dashboard')
+    print("Type 'd between 1 and 20' to show specific numbers of submissions(default:5). ex: d 10") 
     print('Type s or submit to submit code')
     print('Type h for help')
     print('Type sp or showproblem to show the specific problem')
     print('Type quit or exit to logout and quit')
-def dashBoard(flag):
+def cmpString(first, second):
+    if first == second:
+        return 1
+    if len(second) >= 15:
+        cnt = 0
+        for i in first:
+            if cnt == 14:
+                return 1
+            if i != second[cnt]:
+                return 0;
+            cnt += 1
+def dashBoard(flag, times):
     soup=BeautifulSoup(session.get(resurl,headers=headers).text,"lxml")
     if len(soup.find_all('tr',attrs={'solutionid':True}))==0:
         return 1
@@ -53,12 +65,17 @@ def dashBoard(flag):
         return 0
     cnt=0
     for i in soup.find_all('tr',attrs={'solutionid':True}):
-        if cnt==5:
+        if cnt==times:
             break
+        if cnt>=9:
+            out=16
+        else:
+            out=17
+        print(cT.bcolors.BOLD+cT.bcolors.FAIL+'-'*out+cT.bcolors.CYAN+str(cnt + 1)+cT.bcolors.BOLD+cT.bcolors.FAIL+'-'*16+cT.bcolors.ENDC)
         solveId=i.find('td',id='solutionid').text
         userId=[]
         userId.append(i.find('a',attrs={'title':True}).text)
-        userId.append(i.find('span',attrs={'title':True}).text)
+        userId.append(i.find('span',attrs={'title':True}).text.rstrip())
         pr=[]
         p=i.find_all('a',attrs={'title':True})[1]
         pr.append(p.get('href').split('=')[1])
@@ -66,23 +83,26 @@ def dashBoard(flag):
         resp=[]
         resp.append(i.find('span',id='judgement',attrs={'data-solutionid':solveId}).text)
         resp.append(i.find_all('span',id='summary')[1].text)
-        if userId[0]==user['account']:
-            print(cT.bcolors.UNDERLINE+cT.bcolors.OKGREEN)
-            print(solveId,userId[0],userId[1],pr[0],pr[1],cT.bcolors.ENDC)
+        if cmpString(userId[0], user['account']):
+            print(cT.bcolors.UNDERLINE+cT.bcolors.OKGREEN, end='')
+            print(solveId,userId[0],userId[1])
+            print(pr[0],pr[1],cT.bcolors.ENDC, end='')
         else:
-            print(solveId,userId[0],userId[1],pr[0],pr[1])
+            print(solveId,userId[0], userId[1])
+            print(pr[0],pr[1], end='')
         print(cT.bcolors.BOLD)
         str1=''.join(list(filter(str.isalnum,resp[0])))
         if str1=='AC':
-            print(cT.bcolors.OKGREEN+str1)
+            print(cT.bcolors.OKGREEN+str1, end='')
         elif str1=='TLE':
-            print(cT.bcolors.OKBLUE+str1)
+            print(cT.bcolors.OKBLUE+str1, end='')
         elif str1=='WA':
-            print(cT.bcolors.FAIL+str1)
+            print(cT.bcolors.FAIL+str1, end='')
         else:
-            print(cT.bcolors.WARNING+str1)
+            print(cT.bcolors.WARNING+str1, end='')
         print(cT.bcolors.ENDC,resp[1])
-        cnt=cnt+1
+        print()
+        cnt+=1
     return 0
 def showProblem(prob):
     response=requests.get(qurl+prob)
@@ -97,16 +117,31 @@ def showProblem(prob):
 while Login()==1:
     print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Login failed ,try again'+cT.bcolors.ENDC)
 while True:
-    c=input(cT.bcolors.OKBLUE+cT.bcolors.BOLD+'>> '+cT.bcolors.ENDC) 
+    while 1:
+        c=input(cT.bcolors.OKBLUE+cT.bcolors.BOLD+'>> '+cT.bcolors.ENDC)
+        if c:
+            break
     if c=='h':
         Help()
     elif c=='submit' or c=='s':
         submitCode()
-    elif c=='dashboard' or c=='d':
-        dashBoard(None)
+    elif c=='dashboard' or c[0]=='d':
+        tmp = 0
+        cnt = 5
+        x = c.split(' ')
+        for i in x:
+            tmp += 1
+            if tmp == 2:
+                cnt = i
+            elif tmp > 2:
+                break
+        if tmp > 2 or (x[0] != 'dashboard' and x[0] != 'd'):
+            print('Unknown command , type h for help')
+        else:
+            dashBoard(None, int(cnt))
     elif c=='showproblem' or c=='sp':
         showProblem(input('Problem: '))
-    elif c=='quit' or c=='exit': 
+    elif c=='quit' or c=='exit' or c=='q': 
         break 
     else:
         print('Unknown command , type h for help')
