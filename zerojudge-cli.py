@@ -116,10 +116,8 @@ def showProblem(prob):
     webbrowser.open_new_tab(qurl+prob)
     return 0
 
-conform_login=input('Login to access more features? Y/N : ')
-if conform_login=='Y' or conform_login=='y':
-    while Login()==1:
-        print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Login failed ,try again'+cT.bcolors.ENDC)
+while Login()==1:
+    print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Login failed ,try again'+cT.bcolors.ENDC)
 
 while True:
     while 1:
@@ -129,37 +127,21 @@ while True:
     if c=='h':
         Help()
     elif c=='submit' or c=='s':
-        if conform_login=='Y' or conform_login=='y':
-            submitCode()
-        else:
-            print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Not login yet!'+cT.bcolors.ENDC)
-            conform_login=input('Login? Y/N :')
-            if conform_login=='Y' or conform_login=='y':
-                while Login()==1:
-                    print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Login failed ,try again'+cT.bcolors.ENDC)
-    
+        submitCode()
     elif c=='dashboard' or c[0]=='d':
-        if conform_login=='Y' or conform_login=='y':
-            tmp = 0
-            cnt = 5
-            x = c.split(' ')
-            for i in x:
-                tmp += 1
-                if tmp == 2:
-                    cnt = i
-                elif tmp > 2:
-                    break
-            if tmp > 2 or (x[0] != 'dashboard' and x[0] != 'd'):
-                print('Unknown conform_login , type h for help')
-            else:
-                dashBoard(None, int(cnt))
+        tmp = 0
+        cnt = 5
+        x = c.split(' ')
+        for i in x:
+            tmp += 1
+            if tmp == 2:
+                cnt = i
+            elif tmp > 2:
+                break
+        if tmp > 2 or (x[0] != 'dashboard' and x[0] != 'd'):
+            print('Unknown conform_login , type h for help')
         else:
-            print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Not login yet!'+cT.bcolors.ENDC)
-            conform_login=input('Login? Y/N : ')
-            if conform_login=='Y' or conform_login=='y':
-                while Login()==1:
-                    print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Login failed ,try again'+cT.bcolors.ENDC)
-    
+            dashBoard(None, int(cnt))
     elif c=='showproblem' or c=='sp':
         showProblem(input('Problem: '))
     elif c=='quit' or c=='exit' or c=='q': 
