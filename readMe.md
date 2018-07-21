@@ -1,5 +1,5 @@
 # zerojudge-cli
-![](icon.png)
+![](icon.ico)
 ___
 
 ## Introdution
