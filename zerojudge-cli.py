@@ -85,7 +85,7 @@ def dashBoard(flag, times):
         resp.append(i.find_all('span',id='summary')[1].text)
         #if userId[0]==user['account']:
         if cmpString(userId[0], user['account']):
-            print(cT.bcolors.UNDERLINE+cT.bcolors.OKGREEN)
+            print(cT.bcolors.UNDERLINE+cT.bcolors.OKGREEN, end='')
             print(solveId,userId[0],userId[1])
             print(pr[0],pr[1],cT.bcolors.ENDC, end='')
         else:
