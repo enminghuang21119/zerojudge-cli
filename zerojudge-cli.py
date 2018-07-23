@@ -5,7 +5,6 @@ import colorTable as cT
 import getpass
 import lxml
 import webbrowser
-exit(2)
 zerjudgecli='''\
  _____                     _           __                      ___ 
 /__  /  ___  _________    (_)_  ______/ /___ ____        _____/ (_)
