@@ -14,7 +14,7 @@ ____
 ### 用法1：
   安裝python3並且安裝下列套件  
   
-    lxml ,beautifulsoup4 ,requests ,colorama ,webbrowser  
+    lxml, beautifulsoup4, requests, colorama
 
 ### 用法2：
   下載並執行Binary檔案  
