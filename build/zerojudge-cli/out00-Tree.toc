@@ -1,0 +1,5 @@
+('c:\\python36\\lib\\site-packages\\colorama-0.3.9-py3.6.egg',
+ None,
+ {'*.pyc', '*.so', '*.pyd', 'EGG-INFO', '*.pyo', '*.py'},
+ 'DATA',
+ [])
