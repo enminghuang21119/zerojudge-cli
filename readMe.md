@@ -11,12 +11,14 @@ ____
 
 **注意：要上傳的檔案需和執行檔放在同一目錄**
 
-用法1：安裝python3並且安裝下列套件
+### 用法1：
+  安裝python3並且安裝下列套件  
+  
+    lxml ,beautifulsoup4 ,requests ,colorama ,webbrowser  
 
-lxml ,beautifulsoup4 ,requests ,colorama ,webbrowser  
-
-用法2：下載並執行Binary檔案  
-**注意：執行檔同目錄下的檔案請勿更改或移動，否則無法執行**
+### 用法2：
+  下載並執行Binary檔案  
+  **注意：執行檔同目錄下的檔案請勿更改或移動，否則無法執行**
 ___
 
 ## Feature
