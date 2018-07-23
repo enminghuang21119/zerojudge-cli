@@ -68,7 +68,7 @@ def submitCode():
     while True:
         lang = inputTry('Language (Default is cpp , or type \'list\' or \'l\' for help): ')
         lang = lang.upper()
-        if lang == 'LIST' or LANG == 'L':
+        if lang == 'LIST' or lang == 'L':
             List()
         elif lang == '':
             lang = 'CPP'
