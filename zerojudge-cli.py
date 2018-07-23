@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
-try:
-    import requests
-    from bs4 import BeautifulSoup
-    import colorTable as cT
-    import getpass
-    import lxml
-    import webbrowser
-except ImportError:
-    print('\033[1m'+'\033[91m'+'Module import error !\nPlease install needed module in zerojudge-cli.py'+'\033[0m')
-    exit(2)
+import requests
+from bs4 import BeautifulSoup
+import colorTable as cT
+import getpass
+import lxml
+import webbrowser
+exit(2)
 zerjudgecli='''\
  _____                     _           __                      ___ 
 /__  /  ___  _________    (_)_  ______/ /___ ____        _____/ (_)
