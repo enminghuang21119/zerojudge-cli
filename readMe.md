@@ -14,8 +14,11 @@ ____
 
 ## Usage
 用法1：安裝python3並且安裝下列套件
+
 lxml ,beautifulsoup4 ,requests ,colorama ,webbrowser
+
 用法2（windows version）：點開dist資料夾並且對exe檔點兩下，並且把要上傳的code放到dist資料夾裡
+
 用法3（linux version）：點開build資料夾下的exe.linux86_64資料夾對著zerojudge-cli點兩下，或者直接對捷徑使用，要上傳的檔案跟捷徑檔案放在一起就好
 
 ___
@@ -35,6 +38,6 @@ ____
 
 ---
 
-##made by Choder and Samuel21119
+## made by Choder and Samuel21119
 主程式By Choder
 排版加美感加強迫症大師Samuel21119
