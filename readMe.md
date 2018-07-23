@@ -1,3 +1,5 @@
+### Forked from Choder69864501/zerojudge-cli : macOS Version
+
 # zerojudge-cli
 ![](icon.ico)
 ___
@@ -20,6 +22,8 @@ lxml ,beautifulsoup4 ,requests ,colorama ,webbrowser
 用法2（windows version）：把dist下的exe檔放到你平時寫code的地方，要用時對他點兩下就好
 
 用法3（linux version）：點開build資料夾下的exe.linux86_64資料夾對著zerojudge-cli點兩下，或者直接對捷徑使用，要上傳的檔案跟捷徑檔案放在一起就好
+
+用法4（macOS version）：點開build資料夾下的exe.macosx-10.13-x86_64資料夾對著zerojudge-cli點兩下，或者直接對捷徑使用，要上傳的檔案跟捷徑檔案放在一起就好
 
 ___
 
