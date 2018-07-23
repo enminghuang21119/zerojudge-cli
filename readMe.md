@@ -7,11 +7,6 @@ ___
 ## Introdution
 這是一個能夠用python去與zerojudge互動的簡易小程式 
 
-___ 
-
-## Install
-下載，然後安裝python的要用的pacakge:requests,beautifulSoup4,webbrowser
-
 ____
 
 ## Usage
