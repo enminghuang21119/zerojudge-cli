@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import colorTable as cT
 import getpass
 import webbrowser
+import colorama
 zerjudgecli='''\
  _____                     _           __                      ___ 
 /__  /  ___  _________    (_)_  ______/ /___ ____        _____/ (_)
@@ -50,17 +51,41 @@ def Login():
     if dashBoard(1,None)==1:
         return 1
     return 0
+def List():
+    print('Supported language')
+    print('->cpp,python,java,pascal,c')
 def submitCode():
     data={}
     problem=inputTry('Problem: ')
-    lang=inputTry('Language (Default is CPP): ')
-    if lang=='':
-        lang='CPP'
+    while True:
+        lang=inputTry("Language (Default is cpp , or type 'list' for help): ") 
+        if lang=='list':
+            List()
+        elif lang=='':
+            lang='cpp'
+            break
+        elif lang=='python':
+            lang='py'
+            break
+        elif lang=='c':
+            lang='c'
+            break
+        elif lang=='java':
+            lang='java'
+            break
+        elif lang=='cpp':
+            lang='cpp'
+            break
+        elif lang=='pascal':
+            lang=='pas'
+            break
+        else:
+            print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Unknow language'+cT.bcolors.ENDC)
     data['language']=lang
     filename=inputTry('Code file name without extension: ')
     codes=[]
     try:
-        data['code']=open(filename+'.'+lang.lower(), "r").read()
+        data['code']=open(filename+'.'+lang, "r").read()
     except (OSError,IOError) as e:
         print(cT.bcolors.BOLD+cT.bcolors.FAIL+'File not found !'+cT.bcolors.ENDC)
     data['problemid']=problem
@@ -149,6 +174,8 @@ while True:
         c=inputTry('>>> ')
         if c:
             break
+    c=c.lstrip()
+    c=c.rstrip()
     if c=='h' or c=='?':
         Help()
     elif c=='submit' or c=='s':
