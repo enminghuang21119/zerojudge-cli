@@ -110,6 +110,7 @@ def dashBoard(flag, times):
         resp=[]
         resp.append(i.find('span', id='judgement', attrs={'data-solutionid':solveId}).text)
         resp.append(i.find_all('span',id='summary')[1].text)
+        language=i.find('button', attrs={'type':'button', 'class':'btn btn-default btn-xs'}).text
         if cmpString(userId[0], user['account']):
             print(cT.bcolors.UNDERLINE+cT.bcolors.OKGREEN, end='')
             print(solveId,userId[0],userId[1])
@@ -127,7 +128,7 @@ def dashBoard(flag, times):
             print(cT.bcolors.FAIL+str1, end='')
         else:
             print(cT.bcolors.WARNING+str1, end='')
-        print(cT.bcolors.ENDC,resp[1])
+        print(cT.bcolors.ENDC,resp[1],language)
         print()
         cnt+=1
     return 0
