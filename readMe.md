@@ -15,9 +15,11 @@ ____
 
 lxml ,beautifulsoup4 ,requests ,colorama ,webbrowser
 
-用法2： 下載並執行Binary檔案
+  
+  
+用法2：下載並執行Binary檔案
 
-
+**注意:執行檔同目錄下的檔案請勿更改或移動，否則無法執行**
 ___
 
 ## Feature
