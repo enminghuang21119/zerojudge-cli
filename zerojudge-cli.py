@@ -5,6 +5,7 @@ import colorTable as cT
 import getpass
 import webbrowser
 import colorama
+colorama.init()
 zerjudgecli='''\
  _____                     _           __                      ___ 
 /__  /  ___  _________    (_)_  ______/ /___ ____        _____/ (_)
@@ -23,7 +24,6 @@ resurl='https://zerojudge.tw/Submissions'
 qurl='https://zerojudge.tw/ShowProblem?problemid='
 user={'token':''}
 purl='https://zerojudge.tw/Solution.api?action=SubmitCode&'
-colorama.init()
 session=requests.session()
 def inputTry(out):
     try:
@@ -53,7 +53,7 @@ def Login():
     return 0
 def List():
     print('Supported language')
-    print('->cpp,python,java,pascal,c')
+    print('->CPP,PYTHON,JAVA,PASCAL,C')
 def submitCode():
     data={}
     problem=inputTry('Problem: ')
@@ -62,22 +62,23 @@ def submitCode():
         if lang=='list':
             List()
         elif lang=='':
-            lang='cpp'
+            lang='CPP'
+            forma='cpp'
             break
-        elif lang=='python':
-            lang='py'
+        elif lang=='PYTHON':
+            forma='py'
             break
-        elif lang=='c':
-            lang='c'
+        elif lang=='C':
+            forma='c'
             break
-        elif lang=='java':
-            lang='java'
+        elif lang=='JAVA':
+            forma='java'
             break
-        elif lang=='cpp':
-            lang='cpp'
+        elif lang=='CPP':
+            forma='cpp'
             break
-        elif lang=='pascal':
-            lang=='pas'
+        elif lang=='PASCAL':
+            forma='pas'
             break
         else:
             print(cT.bcolors.BOLD+cT.bcolors.FAIL+'Unknow language'+cT.bcolors.ENDC)
@@ -85,7 +86,7 @@ def submitCode():
     filename=inputTry('Code file name without extension: ')
     codes=[]
     try:
-        data['code']=open(filename+'.'+lang, "r").read()
+        data['code']=open(filename+'.'+forma,"r").read()
     except (OSError,IOError) as e:
         print(cT.bcolors.BOLD+cT.bcolors.FAIL+'File not found !'+cT.bcolors.ENDC)
     data['problemid']=problem
