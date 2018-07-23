@@ -32,3 +32,9 @@ ____
 ## Todo 
 - 不需要手動安裝python套作可以自動安裝
 - 希望有一天我可以用上AUR？(¯―¯٥）
+
+---
+
+##made by Choder and Samuel21119
+主程式By Choder
+排版加美感加強迫症大師Samuel21119
