@@ -35,6 +35,6 @@ ____
 
 ---
 
-##made by Choder and Samuel21119
+## made by Choder and Samuel21119
 主程式By Choder
 排版加美感加強迫症大師Samuel21119
