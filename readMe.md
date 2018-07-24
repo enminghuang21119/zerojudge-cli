@@ -21,7 +21,7 @@ ____
   下載並執行Binary檔案  
   
   Windows: 雙擊zerojudge-cli-windows.exe  
-  macOS: 雙擊zerojudge-cli-macOS.exe   
+  macOS: 雙擊zerojudge-cli-macOS  
   Linux: 開啟terminal到達檔案目錄，輸入  
   
     ./zerojudge-cli-linux
