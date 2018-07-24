@@ -27,7 +27,7 @@ ____
     ./zerojudge-cli-linux
   以開啟程式  
   
-  macOS和Linux版本須先開啟terminal，到下載zerojudge-cli的資料夾並執行
+  macOS和Linux版本須先開啟terminal，到執行檔的資料夾並執行
   
     chmod u+x zerojudge-cli-*
   才可以執行
