@@ -29,7 +29,7 @@ ____
   
   macOS和Linux版本須先開啟terminal，到下載zerojudge-cli的資料夾並執行
   
-    chmod u+x zerojudge-cli*
+    chmod u+x zerojudge-cli-*
   才可以執行
   
 輸入h可顯示help
