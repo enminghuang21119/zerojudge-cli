@@ -19,7 +19,18 @@ ____
 
 ### 用法2：
   下載並執行Binary檔案  
-  **注意：macOS和Linux版本須先chmod u+x zerojudge-cli才可以執行**
+  
+  Windows: 雙擊zerojudge-cli-windows.exe  
+  macOS: 雙擊zerojudge-cli-macOS.exe   
+  Linux: 開啟terminal到達檔案目錄，輸入  
+  
+    ./zerojudge-cli-linux
+  以開啟程式  
+  
+  macOS和Linux版本須先開啟terminal，到下載zerojudge-cli的資料夾並執行
+  
+    chmod u+x zerojudge-cli*
+  才可以執行
   
 輸入h可顯示help
 ___
