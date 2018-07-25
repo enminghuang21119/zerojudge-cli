@@ -9,13 +9,13 @@ from bs4 import BeautifulSoup
 
 colorama.init()
 
-zerjudgecli='''\
- _____                     _           __                      ___ 
+zerjudgecli = '''\
+ _____                     _           __                      ___
 /__  /  ___  _________    (_)_  ______/ /___ ____        _____/ (_)
-  / /  / _ \/ ___/ __ \  / / / / / __  / __ `/ _ \______/ ___/ / / 
- / /__/  __/ /  / /_/ / / / /_/ / /_/ / /_/ /  __/_____/ /__/ / /  
-/____/\___/_/   \____/_/ /\__,_/\__,_/\__, /\___/      \___/_/_/   
-                    /___/            /____/                        
+  / /  / _ \/ ___/ __ \  / / / / / __  / __ `/ _ \______/ ___/ / /
+ / /__/  __/ /  / /_/ / / / /_/ / /_/ / /_/ /  __/_____/ /__/ / /
+/____/\___/_/   \____/_/ /\__,_/\__,_/\__, /\___/      \___/_/_/
+                    /___/            /____/
 '''
 print(cT.bcolors.CYAN + zerjudgecli + cT.bcolors.ENDC)
 
@@ -26,9 +26,10 @@ logouturl = 'https://zerojudge.tw/Logout'
 Userurl = 'https://zerojudge.tw/UserStatistic'
 resurl = 'https://zerojudge.tw/Submissions'
 qurl = 'https://zerojudge.tw/ShowProblem?problemid='
-user = {'token':''}
+user = {'token': ''}
 purl = 'https://zerojudge.tw/Solution.api?action=SubmitCode&'
 session = requests.session()
+
 
 def inputTry(out):
     try:
@@ -40,6 +41,7 @@ def inputTry(out):
         print()
         sys.exit(1)
     return re
+
 
 def Login():
     account = inputTry('Account: ')
@@ -58,15 +60,18 @@ def Login():
         return 1
     return 0
 
+
 def List():
     print('Supported languages:')
     print('-> C, Cpp, Python, Java, Pascal')
+
 
 def submitCode():
     data = {}
     problem = inputTry('Problem: ')
     while True:
-        lang = inputTry('Language (Default is cpp , or type \'list\' or \'l\' for help): ')
+        lang = inputTry(
+            'Language (Default is cpp , or type \'list\' or \'l\' for help): ')
         lang = lang.upper()
         if lang == 'LIST' or lang == 'L':
             List()
@@ -90,25 +95,35 @@ def submitCode():
             forma = 'pas'
             break
         else:
-            print(cT.bcolors.BOLD + cT.bcolors.FAIL + 'Unknow language' + cT.bcolors.ENDC)
+            print(
+                cT.bcolors.BOLD +
+                cT.bcolors.FAIL +
+                'Unknow language' +
+                cT.bcolors.ENDC)
     data['language'] = lang
     filename = inputTry('Code file name without extension: ')
     codes = []
     try:
         data['code'] = open(filename + '.' + forma, "r").read()
-    except (OSError,IOError) as e:
-        print(cT.bcolors.BOLD + cT.bcolors.FAIL + 'File not found !' + cT.bcolors.ENDC)
+    except (OSError, IOError) as e:
+        print(
+            cT.bcolors.BOLD +
+            cT.bcolors.FAIL +
+            'File not found !' +
+            cT.bcolors.ENDC)
     data['problemid'] = problem
     data['contestid'] = 0
-    session.post(purl, data = data, headers=headers)
+    session.post(purl, data=data, headers=headers)
+
 
 def Help():
     print('Type d or dashboard to see the dashboard')
-    print("Type 'd between 1 and 20' to show specific numbers of submissions(default:5). ex: d 10") 
+    print("Type 'd between 1 and 20' to show specific numbers of submissions(default:5). ex: d 10")
     print('Type s or submit to submit code')
     print('Type h for help')
     print('Type sp or showproblem to show the specific problem')
     print('Type quit or exit to logout and quit')
+
 
 def cmpString(first, second):
     if first == second:
@@ -119,39 +134,60 @@ def cmpString(first, second):
             if cnt == 14:
                 return 1
             if i != second[cnt]:
-                return 0;
+                return 0
             cnt += 1
+
 
 def dashBoard(flag, times):
     soup = BeautifulSoup(session.get(resurl, headers=headers).text, "lxml")
-    if len(soup.find_all('tr', attrs={'solutionid':True})) == 0:
+    if len(soup.find_all('tr', attrs={'solutionid': True})) == 0:
         return 1
     if flag:
         return 0
     cnt = 0
-    for i in soup.find_all('tr', attrs={'solutionid':True}):
+    for i in soup.find_all('tr', attrs={'solutionid': True}):
         if cnt == times:
             break
         if cnt > 9:
             out = 16
         else:
             out = 17
-        print(cT.bcolors.BOLD + cT.bcolors.FAIL + '-'*out + cT.bcolors.CYAN + str(cnt + 1) + cT.bcolors.BOLD + cT.bcolors.FAIL + '-'*16 + cT.bcolors.ENDC)
-        solveId = i.find('td',id='solutionid').text
+        print(cT.bcolors.BOLD +
+              cT.bcolors.FAIL +
+              '-' *
+              out +
+              cT.bcolors.CYAN +
+              str(cnt +
+                  1) +
+              cT.bcolors.BOLD +
+              cT.bcolors.FAIL +
+              '-' *
+              16 +
+              cT.bcolors.ENDC)
+        solveId = i.find('td', id='solutionid').text
         userId = []
-        userId.append(i.find('a', attrs={'title':True}).text)
-        userId.append(i.find('span', attrs={'title':True}).text.rstrip())
+        userId.append(i.find('a', attrs={'title': True}).text)
+        userId.append(i.find('span', attrs={'title': True}).text.rstrip())
         pr = []
-        p = i.find_all('a', attrs={'title':True})[1]
+        p = i.find_all('a', attrs={'title': True})[1]
         pr.append(p.get('href').split('=')[1])
         pr.append(p.text)
         resp = []
-        resp.append(i.find('span', id='judgement', attrs={'data-solutionid':solveId}).text)
+        resp.append(
+            i.find(
+                'span',
+                id='judgement',
+                attrs={
+                    'data-solutionid': solveId}).text)
         resp.append(i.find_all('span', id='summary')[1].text)
-        language = i.find('button', attrs={'type':'button', 'class':'btn btn-default btn-xs'}).text
+        language = i.find(
+            'button',
+            attrs={
+                'type': 'button',
+                'class': 'btn btn-default btn-xs'}).text
         if cmpString(userId[0], user['account']):
             print(cT.bcolors.UNDERLINE + cT.bcolors.OKGREEN, end='')
-            print(solveId,userId[0], userId[1])
+            print(solveId, userId[0], userId[1])
             print(pr[0], pr[1], cT.bcolors.ENDC, end='')
         else:
             print(solveId, userId[0], userId[1])
@@ -171,21 +207,31 @@ def dashBoard(flag, times):
         cnt += 1
     return 0
 
+
 def showProblem(prob):
     try:
         response = requests.get(qurl + prob)
         response.raise_for_status()
     except requests.exceptions.HTTPError as e:
         print('Error: ' + str(e))
-        print(cT.bcolors.BOLD + cT.bcolors.FAIL + 'wrong problem number' + cT.bcolors.ENDC)
+        print(
+            cT.bcolors.BOLD +
+            cT.bcolors.FAIL +
+            'wrong problem number' +
+            cT.bcolors.ENDC)
         return 1
     webbrowser.open_new_tab(qurl + prob)
     return 0
 
-#Program start
+# Program start
+
 
 while Login() == 1:
-    print(cT.bcolors.BOLD + cT.bcolors.FAIL + 'Login failed ,try again' + cT.bcolors.ENDC)
+    print(
+        cT.bcolors.BOLD +
+        cT.bcolors.FAIL +
+        'Login failed ,try again' +
+        cT.bcolors.ENDC)
 while True:
     while 1:
         c = inputTry('>>> ')
@@ -216,7 +262,7 @@ while True:
                 print('Unknown command , type h or ? for help')
     elif c == 'showproblem' or c == 'sp':
         showProblem(inputTry('Problem: '))
-    elif c == 'quit' or c == 'exit' or c == 'q': 
+    elif c == 'quit' or c == 'exit' or c == 'q':
         break
     else:
         print('Unknown command , type h for help')
