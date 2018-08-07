@@ -1,15 +1,30 @@
-#!/usr/bin/env python3
-import sys
-from cx_Freeze import setup,Executable
-base=''
-if sys.platform=='win32':
-    base="Win32GUI"
-packages=["idna","requests","multiprocessing"]
-options={'build_exe':{'packages':packages,},}
+from cx_Freeze import setup, Executable
+
+base = None
+
+executables = [Executable("zerojudge-cli.py", base=base)]
+
+# packages = ["idna"]
+options = {
+    'build_exe': {
+        'packages': [
+            'bs4',
+            'getpass',
+            'lxml',
+            'webbrowser',
+            'requests',
+            'colorTable',
+            'queue',
+            'idna',
+            'sys',
+            'colorama'],
+    },
+}
+
 setup(
-    name='zerojudge.exe',
-    version='0.1',
+    name="zerojudge-cli",
     options=options,
-    description='zerojudge in command line',
-    executables=[Executable("zerojudge-cli.py",base=base,icon="icon.ico")]
+    version="1.0",
+    description='Build by samuel21119 and Choder',
+    executables=executables
 )

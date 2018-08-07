@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['zerojudge-cli.py'],
-             pathex=['C:\\Users\\USER\\Desktop\\zerojudge-cli-master'],
+             pathex=['/Users/samuel/Documents/zerojudge-cli'],
              binaries=[],
              datas=[],
              hiddenimports=[],

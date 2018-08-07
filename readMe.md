@@ -1,5 +1,3 @@
-### Forked from Choder69864501/zerojudge-cli : macOS Version
-
 # zerojudge-cli
 ![](icon.ico)
 ___
@@ -10,16 +8,31 @@ ___
 ____
 
 ## Usage
-用法1：安裝python3並且安裝下列套件
 
-lxml ,beautifulsoup4 ,requests ,colorama ,webbrowser
+**注意：要上傳的檔案需和執行檔放在同一目錄**
 
-用法2（windows version）：把dist下的exe檔放到你平時寫code的地方，要用時對他點兩下就好
+### 用法1：
+  安裝python3並且安裝下列套件  
+  
+    lxml, beautifulsoup4, requests, colorama
+  並使用python3執行zerojudge.py
 
-用法3（linux version）：點開build資料夾下的exe.linux86_64資料夾對著zerojudge-cli點兩下，或者直接對捷徑使用，要上傳的檔案跟捷徑檔案放在一起就好
-
-用法4（macOS version）：點開build資料夾下的exe.macosx-10.13-x86_64資料夾對著zerojudge-cli點兩下，或者直接對捷徑使用，要上傳的檔案跟捷徑檔案放在一起就好
-
+### 用法2：
+  下載並執行Binary檔案  
+  
+  Windows: 雙擊zerojudge-cli-windows.exe  
+  macOS: 雙擊zerojudge-cli-macOS  
+  Linux: 開啟terminal到達檔案目錄，輸入  
+  
+    ./zerojudge-cli-linux
+  以開啟程式  
+  
+  macOS和Linux版本須先開啟terminal，到執行檔的資料夾並執行
+  
+    chmod u+x zerojudge-cli-*
+  才可以執行
+  
+輸入h可顯示help
 ___
 
 ## Feature
@@ -29,6 +42,7 @@ ___
 4. 自己的submission有綠色底線
 5. 可以看題目
 6. 在不使用原始碼都情況下不需要安裝python套件及python本身
+
 ____
 
 ## Todo 
@@ -38,5 +52,5 @@ ____
 ---
 
 ## made by Choder and Samuel21119
-主程式By Choder
-排版加美感加強迫症大師Samuel21119
+主程式By Choder  
+排版加美感加維護加強迫症大師Samuel21119
